@@ -14,6 +14,7 @@ window.onload = function() {
 };
 
 function play(ctx, node) {
+    var freq = 220.0;
     // Get current time in seconds
     var startTime = ctx.currentTime;
     // Set duration in seconds
@@ -26,10 +27,22 @@ function play(ctx, node) {
     var buffer = ctx.createBuffer(1, length, rate);
     // Grab channel for inserting samples
     var data = buffer.getChannelData(0);
+    // Get wave period
+    var period = Math.floor(rate / freq);
 
-    // Generate white noise
-    for (var i = 0; i < data.length; i++) {
+    // Generate white noise (random excitation)
+    for (var i = 0; i < period; i++) {
         data[i] = Math.random() * 2 - 1;
+    }
+
+    // Decay of feedback loop
+    var decay = 0.993;
+    // Length of buffer beyond initial excitation
+    var len = data.length - period;
+
+    // Feedback loop
+    for (var i = 0; i < len; i++) {
+        data[i + period] = (data[i] + data[i + 1]) * decay * 0.5;
     }
 
     // Create audio source

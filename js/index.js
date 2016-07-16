@@ -14,14 +14,22 @@ window.onload = function() {
 };
 
 function play(ctx, node) {
-    // Frequency of note
-    var freq = 220.0;
     // Get current time in seconds
     var startTime = ctx.currentTime;
     // Set duration in seconds (of each note, sustain)
     var duration = 1.0;
-    // Play our note
-    playNote(ctx, node, freq, startTime, duration);
+    // Time between each note in seconds
+    var speed = 0.25;
+    // Sequence of frequencies
+    var sequence = [220, 330, 440, 550, 660, 550, 440, 330];
+    // Play sequence of notes
+    for (var i = 0; i < sequence.length; i++) {
+        var freq = sequence[i];
+        playNote(ctx, node, freq, startTime, duration);
+        startTime += speed;
+    }
+    // Finish with longer note
+    playNote(ctx, node, 220, startTime, duration * 4);
 }
 
 function playNote(ctx, node, freq, startTime, duration) {

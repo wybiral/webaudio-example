@@ -18,8 +18,13 @@ function play(ctx, node) {
     var freq = 220.0;
     // Get current time in seconds
     var startTime = ctx.currentTime;
-    // Set duration in seconds
+    // Set duration in seconds (of each note, sustain)
     var duration = 1.0;
+    // Play our note
+    playNote(ctx, node, freq, startTime, duration);
+}
+
+function playNote(ctx, node, freq, startTime, duration) {
     // Get sample rate
     var rate = ctx.sampleRate;
     // Compute buffer length

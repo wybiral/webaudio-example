@@ -14,6 +14,7 @@ window.onload = function() {
 };
 
 function play(ctx, node) {
+    // Frequency of note
     var freq = 220.0;
     // Get current time in seconds
     var startTime = ctx.currentTime;

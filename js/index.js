@@ -6,6 +6,12 @@ window.onload = function() {
     // Connect gain node to context (output)
     node.connect(ctx.destination);
 
+    // Add handler for volume slider
+    var volume = document.getElementById('volume');
+    volume.onchange = function() {
+        node.gain.value = volume.value / 100;
+    };
+
     // Add handler for play button
     var btn = document.getElementById('play');
     btn.onclick = function() {

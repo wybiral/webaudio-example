@@ -2,20 +2,20 @@ window.onload = function() {
     // Create WebAudio context
     var ctx = new AudioContext();
     // Create gain node
-    var node = ctx.createGain();
+    var gainNode = ctx.createGain();
     // Connect gain node to context (output)
-    node.connect(ctx.destination);
+    gainNode.connect(ctx.destination);
 
     // Add handler for volume slider
     var volume = document.getElementById('volume');
     volume.onchange = function() {
-        node.gain.value = volume.value / 100;
+        gainNode.gain.value = volume.value / 100;
     };
 
     // Add handler for play button
     var btn = document.getElementById('play');
     btn.onclick = function() {
-        play(ctx, node);
+        play(ctx, gainNode);
     };
 };
 
